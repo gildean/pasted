@@ -1,0 +1,15 @@
+extends template
+block body
+  if paste
+      pre#simpledit(contenteditable="true", style="display:none")
+        = paste.text
+      #editor
+        = paste.text
+      input#langs(type="hidden", value="#{paste.lang}", name="db")
+      input#docid(type="hidden", value="#{paste._id}")
+  else
+    pre#simpledit(contenteditable="true", style="display:none")
+    #editor
+    input#langs(type="hidden", value="JavaScript")
+    input#docid(type="hidden", value="")
+  input#csrf(type="hidden", name="_csrf", value="#{token}")

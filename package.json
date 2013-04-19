@@ -1,0 +1,27 @@
+{
+  "name": "pasted",
+  "version": "0.0.1",
+  "description": "An open-source pastebin",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.1.2",
+    "jade": "~0.28.2",
+    "mongojs": "~0.7.4",
+    "client-sessions": "~0.1.1",
+    "bcrypt": "~0.7.5"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git://github.com/gildean/pasted",
+  "keywords": [
+    "pastebin"
+  ],
+  "author": "Olli K",
+  "license": "BSD"
+}

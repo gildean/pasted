@@ -1,0 +1,199 @@
+!!!
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="description", content="Pastebin made with node.js")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="viewport", content="width=device-width, height=device-height, initial-scale=1")
+    meta(name="designer", content="gildean <http://julkinen.salaliitto.com>")
+    title #{title}
+    link(href='http://fonts.googleapis.com/css?family=Oxygen+Mono|Open+Sans', rel='stylesheet')
+    link(href="/static/css/font-awesome.min.css", rel="stylesheet")
+    link(rel="stylesheet", href="/static/css/style.css")
+
+  body
+    //if lt IE 10
+      #oldie 
+        p Old Internet Explorer is not supported by this app 
+        p Update or change your browser
+    noscript
+      p This application requires javascript.
+    block body
+    #returnscreen.icon-resize-small(style="display:none")
+    #topbar
+      #menu
+        #buttons
+          #save.icon-save
+            span.tooltip Save
+              span
+          #link.icon-link
+            span.tooltip Link
+              span
+          #copy.icon-copy
+            span.tooltip Fork
+              span
+          #reset.icon-trash
+            span.tooltip Reset
+              span
+          #simple.icon-reorder
+            span.tooltip Simple
+              span
+          #raw.icon-book
+            span.tooltip Raw
+              span
+          #setbutton.icon-wrench
+            span.tooltip Settings
+              span
+          if user === 'guest'
+            #login.icon-lock
+              span.tooltip Login
+                span
+          else
+            #login.icon-key
+              span.tooltip Logout
+                span
+          #fullscreen.icon-resize-full
+            span.tooltip Fullscreen
+              span          
+          select#lang
+            option CoffeeScript
+            option C#
+            option CSS
+            option Dart
+            option Diff
+            option Dot
+            option Go
+            option HAML
+            option HTML
+            option C/C++
+            option Clojure
+            option Jade
+            option Java
+            option JSP
+            option JavaScript
+            option JSON
+            option LaTeX
+            option LESS
+            option Lisp
+            option Scheme
+            option LiveScript
+            option Lua
+            option LuaPage
+            option Lucene
+            option Makefile
+            option Markdown
+            option Objective-C
+            option OCaml
+            option Pascal
+            option Perl
+            option pgSQL
+            option PHP
+            option Powershell
+            option Python
+            option R
+            option RDoc
+            option RHTML
+            option Ruby
+            option OpenSCAD
+            option Scala
+            option SCSS
+            option SASS
+            option SH
+            option SQL
+            option Stylus
+            option SVG
+            option Tex
+            option Text
+            option Textile
+            option Typescript
+            option VBScript
+            option XML
+            option XQuery
+            option YAML
+        #settings
+          p#themeselect
+            label#themelabel(for="theme") Theme: 
+            select#theme(name="theme")
+              option chrome
+              option clouds
+              option clouds midnight
+              option cobalt
+              option crimson editor
+              option dawn
+              option dreamweaver
+              option eclipse
+              option github
+              option idle fingers
+              option merbivore
+              option merbivore soft
+              option mono industrial
+              option monokai
+              option pastel on dark
+              option solarized dark
+              option solarized light
+              option textmate
+              option tomorrow
+              option tomorrow night
+              option tomorrow night blue
+              option tomorrow night bright
+              option tomorrow night eighties
+              option twilight
+              option vibrant ink
+          div.slabel
+            label.blable(for="wordwrap") Soft Wrap Words
+            p.slider
+              input(type="checkbox", name="wordwrap", id="wordwrap", checked)
+              label(for="wordwrap")
+          div.slabel
+            label.blable(for="lineselect") Full Line Selection 
+            p.slider
+              input(type="checkbox", name="lineselect", id="lineselect", checked)
+              label(for="lineselect")
+          div.slabel
+            label.blable(for="linehilight") Highlight Active Line 
+            p.slider
+              input(type="checkbox", name="linehilight", id="linehilight", checked)
+              label(for="linehilight")
+          div.slabel
+            label.blable(for="showinvisible") Show Invisibles 
+            p.slider
+              input(type="checkbox", name="showinvisible", id="showinvisible", checked)
+              label(for="showinvisible")
+          div.slabel
+            label.blable(for="indentguides") Show Indent Guides  
+            p.slider
+              input(type="checkbox", name="indentguides", id="indentguides", checked)
+              label(for="indentguides") 
+          div.slabel
+            label.blable(for="showgutter") Show Gutter 
+            p.slider
+              input(type="checkbox", name="showgutter", id="showgutter", checked)
+              label(for="showgutter")
+          div.slabel
+            label.blable(for="showprint") Show Print Margin 
+            p.slider
+              input(type="checkbox", name="showprint", id="showprint", checked)
+              label(for="showprint")
+          div.slabel
+            label.blable(for="wordhilight") Highlight selected word 
+            p.slider
+              input(type="checkbox", name="wordhilight", id="wordhilight", checked)
+              label(for="wordhilight")
+        form#loginbox(style="display:none", name="loginform")
+          label(for="username") Username 
+          input(type="text", name="username", id="username")
+          label(for="password") Password
+          input(type="password", name="password", id="password")
+          label#conflabel(for="passwordconf", style="display:none") Confirm 
+          input(type="password", name="passwordconf", id="passwordconf", style="display:none")
+          p
+            span#registerbutton register
+            input#loginbutton(type="submit", value="login")
+        #logo
+          h1
+            a(href="/") #{appname}
+      #status(style="display:none")
+
+    script(src="http://ajaxorg.github.io/ace/build/src/ace.js")
+    script(src="/static/js/jquery.js")
+    script(src="/static/js/script.js")
