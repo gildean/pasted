@@ -2,7 +2,7 @@ var crypto = require('crypto'),
     config = require('./config'),
     appname = config.appname,
     dbDriver = require('./plugins/' + config.db.driver),
-	exts = {
+    exts = {
         'CoffeeScript': 'coffee',
         'C#': 'cs',
         'CSS': 'css',

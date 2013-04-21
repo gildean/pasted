@@ -1,9 +1,9 @@
 // configs
 module.exports = {
-	'db': {
-		driver: 'mongo',
-		address: 'pasted'
-	},
-	'appname': 'pasted',
-	'port': 2222
+    'db': {
+        driver: 'mongo',
+        address: 'pasted'
+    },
+    'appname': 'pasted',
+    'port': 2222
 };

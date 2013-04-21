@@ -6,7 +6,7 @@ Check the demo at: [pasted.herokuapp.com](http://pasted.herokuapp.com)
 
 ##Usage
 
-Set your configs in ```config.js``` and run the server with node app.js
+Set your configs in ```config.js``` and run the server with ```node app.js```
 
 ##License
 
