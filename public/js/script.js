@@ -16,6 +16,7 @@
         registerbutton = $('#registerbutton'),
         topbar = $('#topbar'),
         langsel = $('#lang'),
+        named = $('#named'),
         csrf = $('#csrf'),
         docid = $('#docid'),
         theme = $('#theme'),
@@ -197,6 +198,14 @@
     (function checkCookies() {
         var cookiearray = document.cookie.replace(/ /g, '').split(';');
         if (cookiearray.length > 1) {
+            var text = editor.getValue();
+            var edit = {
+                paste: text,
+                lang: langs.val(),
+                _csrf: csrf.val(),
+                id: docid.val()
+            };
+            pushToState(edit, named.val(), edit.id, window.location.href);
             cookiearray.forEach(function (crumb) {
                 var splitted = crumb.split('=');
                 cookies[splitted[0]] = splitted[1];
@@ -216,24 +225,23 @@
             ].forEach(function (crumb) {
                 document.cookie = crumb + expr;
             });
-            checkCookies();
+            return checkCookies();
         }
+        Object.keys(cookies).forEach(function (key) {
+            var val;
+            if (key !== 'theme' && key !== 'lang') {
+                val = (cookies[key] === 'true') ? true : false;
+                $('#' + key).prop('checked', val);
+            } else if (key === 'lang' && langs.prop('name') !== 'db') {
+                langS = cookies[key];
+            } else if (key === 'theme') {
+                val = cookies[key];
+            }
+            if (userSettings.hasOwnProperty(key)) {
+                userSettings[key](val);
+            }
+        });
     }());
-
-    Object.keys(cookies).forEach(function (key) {
-        var val;
-        if (key !== 'theme' && key !== 'lang') {
-            val = (cookies[key] === 'true') ? true : false;
-            $('#' + key).prop('checked', val);
-        } else if (key === 'lang' && langs.prop('name') !== 'db') {
-            langS = cookies[key];
-        } else if (key === 'theme') {
-            val = cookies[key];
-        }
-        if (key !== 'lang') {
-            userSettings[key](val);
-        }
-    });
 
     //setup the editor
     theme.val(cookies.theme);
