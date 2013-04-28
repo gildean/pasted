@@ -82,7 +82,7 @@ exports.save = function (req, res, next) {
                 url: (req.host + '/' + req.paste.owner + '/' + req.paste.name),
                 name: req.paste.name,
                 owner: req.paste.owner,
-                _id: req.paste.id
+                id: req.paste._id
             });
         } else {
             next(new Error('Database broken'));

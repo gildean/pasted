@@ -143,14 +143,16 @@ label:hover {
 	padding: 0.7em 0 0.7em 4em;
 }
 
-#loginbox {
+#loginbox, #aboutbox {
 	position: fixed;
-	top: 2em;
+	top: 4em;
 	right: 1em;
-	width: 15em;
+	width: 17em;
 	height: 6em;
-	background: rgba(0,0,0,0.9);
+	background: rgba(10,10,10,0.9);
 	padding: 0.5em;
+	font-size: 90%;
+	text-align: center;
 }
 
 #loginbox label {
@@ -193,6 +195,10 @@ label:hover {
 #setbutton:hover {
 	cursor: pointer;
 	opacity: 1;
+}
+
+.link {
+	color: rgb(200,200,200);
 }
 
 #returnscreen {
@@ -337,7 +343,6 @@ input[type=checkbox] {
 	opacity: 1;
 }
 
-
 #logo a {
 	transition: color 0.2s ease-in-out;
 	-webkit-transition: color 0.2s ease-in-out;
@@ -386,5 +391,6 @@ option {
 	right: 0;
 	background: #0e0e0e;
 	color: #fcfcfc;
-	font-size: 130%;
+	font-size: 150%;
+	text-align: center;
 }

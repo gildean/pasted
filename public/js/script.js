@@ -1,4 +1,4 @@
-(function (ace, $, window, undefined) {
+(function (ace, $, window, document, undefined) {
     "use strict";
     // set some selectors and initial values
     var status = $('#status'),
@@ -14,6 +14,7 @@
         conflabel = $('#conflabel'),
         confirmationinput = $('#passwordconf'),
         registerbutton = $('#registerbutton'),
+        aboutbox = $('#aboutbox'),
         topbar = $('#topbar'),
         langsel = $('#lang'),
         named = $('#named'),
@@ -86,6 +87,7 @@
 
     editor.getSession().setMode('ace/mode/' + langModes[langS]);
 
+    // actions per settings
     var userSettings = {
         wordwrap: function (val) {
             editor.getSession().setUseWrapMode(val);
@@ -116,6 +118,7 @@
         }
     };
 
+    // actions for each toprow button
     var buttonActions = {
         simple: function () {
             if (simple) {
@@ -142,6 +145,9 @@
         login: function () {
             loginbox.fadeToggle();
         },
+        about: function () {
+            aboutbox.fadeToggle();
+        },
         fullscreen: function () {
             topbar.fadeToggle();
             returnscreen.fadeToggle();
@@ -164,14 +170,12 @@
                 var edit = {
                     paste: text,
                     lang: langs.val(),
-                    _csrf: csrf.val()
-                },
-                did = docid.val();
-                if ('' !== did) {
-                    edit.id = did;
-                }
+                    _csrf: csrf.val(),
+                    id: docid.val()
+                };
                 ajaxPost(edit, '/save/', function (err, done) {
                     if (!err && done) {
+                        edit.id = done.id;
                         updateStatus('Saved!');
                         pushToState(edit, done.name, done.id, '/' + done.owner + '/' + done.name);
                     } else {
@@ -247,6 +251,7 @@
     theme.val(cookies.theme);
     langsel.val(langS);
 
+    // the small status-indicator
     function updateStatus(statusText) {
         (function tryAgain() {
             if ('' === status.text()) {
@@ -261,9 +266,10 @@
         }());
     }
 
+    // set a cookie, remove old if already set
     function setCookie(cookieName, value) {
         var val;
-        if (cookies.hasOwnProperty(cookieName)) {
+        if (Object.keys(cookies).indexOf(cookieName) > -1) {
             document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
         }
         if (cookieName !== 'theme') {
@@ -275,6 +281,7 @@
         document.cookie = cookieName + '=' + value + '; path=/';
     }
 
+    // a ajax-post-req helper function which returns a callback
     function ajaxPost(json, url, callback) {
         $.ajax({
             url: url,
@@ -291,6 +298,19 @@
         });
     }
 
+    // this fades the menus/indicators if clicked outside the said menu
+    function fadeMenus(event) {
+        $('#aboutbox, #loginbox, #settings').each(function () {
+            var el = $(this);
+            if (event.target.id !== el.id && el.is(':visible') && !el.data('fading')) {
+                el.data('fading', true);
+                el.fadeOut(300, function () {
+                    el.data('fading', false);
+                });
+            }
+        });
+    }
+
     // the push-state navigation
     function pushToState(data, name, id, url) {
         docid.val(id);
@@ -299,6 +319,7 @@
 
     window.onpopstate = function (e) {
         if (e.state) {
+            docid.val(e.state.id);
             editor.setValue(e.state.paste);
             langsel.val(e.state.lang);
         }
@@ -353,11 +374,14 @@
     buttons.on('click', function (event) {
         event.stopPropagation();
         event.preventDefault();
+        fadeMenus(event);
         var eid = event.target.id;
         if (buttonActions.hasOwnProperty(eid)) {
             return buttonActions[eid]();
         }
     });
+
+    editel.on('click', fadeMenus);
 
     settings.on('change', function (event) {
         event.stopPropagation();
@@ -371,4 +395,4 @@
         }
     });
 
-}(ace, $, window));
+}(ace, $, window, document));
