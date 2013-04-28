@@ -1,0 +1,8 @@
+{
+    "db": {
+        "driver": "mongo",
+        "address": "paste"
+    },
+    "appname": "pasted",
+    "port": 2222
+}
