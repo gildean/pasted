@@ -21,7 +21,7 @@
         csrf = $('#csrf'),
         docid = $('#docid'),
         theme = $('#theme'),
-        settings = $('#settings'),
+        settingsbox = $('#settingsbox'),
         langs = $('#langs'),
         langS = langs.val(),
         langModes = {
@@ -139,8 +139,8 @@
                 updateStatus('Save your paste first');
             }
         },
-        setbutton: function () {
-            settings.fadeToggle();
+        settings: function () {
+            settingsbox.fadeToggle();
         },
         login: function () {
             loginbox.fadeToggle();
@@ -300,9 +300,9 @@
 
     // this fades the menus/indicators if clicked outside the said menu
     function fadeMenus(event) {
-        $('#aboutbox, #loginbox, #settings').each(function () {
+        $('#aboutbox, #loginbox, #settingsbox').each(function () {
             var el = $(this);
-            if (event.target.id !== el.id && el.is(':visible') && !el.data('fading')) {
+            if ((event.target.id === '' || el.context.id.indexOf(event.target.id) < 0) && el.is(':visible') && !el.data('fading')) {
                 el.data('fading', true);
                 el.fadeOut(300, function () {
                     el.data('fading', false);
@@ -383,7 +383,7 @@
 
     editel.on('click', fadeMenus);
 
-    settings.on('change', function (event) {
+    settingsbox.on('change', function (event) {
         event.stopPropagation();
         event.preventDefault();
         var eid = event.target.id,

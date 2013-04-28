@@ -85,7 +85,7 @@ div:hover > .tooltip, li:hover > .tooltip, a:hover > .tooltip, span:hover > .too
 	color: #f5f5f5;
 }
 
-#settings {
+#settingsbox {
 	position: fixed;
 	top: 1.9em;
 	right: 0;
@@ -117,7 +117,7 @@ label:hover {
 	cursor: pointer;
 }
 
-#settings div {
+#settingsbox div {
 	width: 100%;
 }
 
@@ -180,7 +180,7 @@ label:hover {
 	text-align: right;
 }
 
-#settings div p {
+#settingsbox div p {
 	width: 2em;
 	padding: 0;
 	display: inline-block;
@@ -188,13 +188,8 @@ label:hover {
 	margin: 0;
 }
 
-#settings p:hover {
+#settingsbox p:hover {
 	cursor: pointer;
-}
-
-#setbutton:hover {
-	cursor: pointer;
-	opacity: 1;
 }
 
 .link {

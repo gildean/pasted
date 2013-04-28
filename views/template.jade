@@ -41,7 +41,7 @@ html(lang="en")
           #raw.icon-book
             span.tooltip Raw
               span
-          #setbutton.icon-wrench
+          #settings.icon-wrench
             span.tooltip Settings
               span
           if user === 'guest'
@@ -54,6 +54,9 @@ html(lang="en")
                 span
           #fullscreen.icon-resize-full
             span.tooltip Fullscreen
+              span          
+          #about.icon-question-sign
+            span.tooltip About
               span          
           select#lang
             option CoffeeScript
@@ -110,7 +113,7 @@ html(lang="en")
             option XML
             option XQuery
             option YAML
-        #settings
+        #settingsbox
           p#themeselect
             label#themelabel(for="theme") Theme: 
             select#theme(name="theme")
@@ -189,6 +192,10 @@ html(lang="en")
           p
             span#registerbutton register
             input#loginbutton(type="submit", value="login")
+        #aboutbox(style="display:none")
+          p Author: Olli K. aka. gildean
+          p Check the source at 
+            a.link(href="https://github.com/gildean/pasted", target="_blank") github
         #logo
           h1
             a(href="/") #{appname}
